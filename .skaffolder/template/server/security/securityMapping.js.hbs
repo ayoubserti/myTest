@@ -1,3 +1,10 @@
+**** PROPERTIES SKAFFOLDER ****
+{
+    "overwrite": true,
+    "forEachObj": "oneTime",
+    "_partials": []
+}
+**** END PROPERTIES SKAFFOLDER ****
 /**
 
   _____                      _              _ _ _     _   _     _        __ _ _      
@@ -24,23 +31,7 @@ exports.authMapping = {
     'POST - /api/users/([^/])+/changePassword': ["ADMIN"],
 
     //YOUR SECURITY MAPPING
-	'POST - /api/companies/*$' : null,
-	'DELETE - /api/companies/([^/])+$' : null,
-	'GET - /api/companies/([^/])+$' : null,
-	'GET - /api/companies/*$' : null,
-	'POST - /api/companies/([^/])+$' : null,
-	'POST - /api/contacts/*$' : null,
-	'DELETE - /api/contacts/([^/])+$' : null,
-	'GET - /api/contacts/findBycompany/([^/])+$' : null,
-	'GET - /api/contacts/([^/])+$' : null,
-	'GET - /api/contacts/*$' : null,
-	'POST - /api/contacts/([^/])+$' : null,
-	'POST - /api/Users/([^/])+/changePassword$' : ["ADMIN"],
-	'POST - /api/Users/*$' : [],
-	'DELETE - /api/Users/([^/])+$' : [],
-	'GET - /api/Users/([^/])+$' : [],
-	'GET - /api/Users/*$' : [],
-	'POST - /api/Users/([^/])+$' : [],
-	
+	{{#each resources}}{{#each _resources}}{{#each _services}}'{{method}} - /api{{../url}}{{#editUrlParamRegExp url}}{{/editUrlParamRegExp}}$' : {{#notNull _roles}}{{#joinObj _roles 'name'}}{{/joinObj}}{{/notNull}}{{#isNull _roles}}null{{/isNull}},
+	{{/each}}{{/each}}{{/each}}
 
 }

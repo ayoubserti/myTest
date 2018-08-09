@@ -1,3 +1,35 @@
+**** PROPERTIES SKAFFOLDER ****
+{
+    "overwrite": false,
+    "forEachObj": "oneTime",
+    "_partials": [
+        {
+            "name": "Partial Import Components",
+            "tagFrom": "/* START MY VIEWS IMPORTS*/",
+            "tagTo": "/* END MY VIEWS IMPORTS*/",
+            "template": "// Do not edit this comment content, it will be overwritten in next Skaffolder generation\r\nimport { HomeComponent } from './pages/home/home.component';\r\n{{#distinctModules modules}}\r\n{{#notHome name}}\r\nimport { {{capitalize name}}Component } from './pages/{{toFileName name}}/{{toFileName name}}.component';\r\n{{/notHome}}\r\n{{/distinctModules}}"
+        },
+        {
+            "name": "Partial Import Services",
+            "tagFrom": "/* START MY SERVICES IMPORTS*/",
+            "tagTo": "/* END MY SERVICES IMPORTS*/",
+            "template": "// Do not edit this comment content, it will be overwritten in next Skaffolder generation\r\n{{#each resources}}\r\n{{#each _resources}}\r\nimport { {{capitalize name}}Service } from './services/{{toFileName name}}.service';\r\n{{/each}}\r\n{{/each}}"
+        },
+        {
+            "name": "Partial Declarations",
+            "tagFrom": "/* START DECLARATIONS */",
+            "tagTo": "/* END DECLARATIONS */",
+            "template": "// Do not edit this comment content, it will be overwritten in next Skaffolder generation\n    HomeComponent,\n{{#each modules}}\n{{#notHome name}}\n    {{capitalize name}}Component,\n{{/notHome}}\n{{/each}}"
+        },
+        {
+            "name": "Partial Providers",
+            "tagFrom": "/* START PROVIDERS */",
+            "tagTo": "/* END PROVIDERS */",
+            "template": "// Do not edit this comment content, it will be overwritten in next Skaffolder generation\r\n{{#each resources}}\r\n{{#each _resources}}\r\n    {{capitalize name}}Service,\r\n{{/each}}\r\n{{/each}}"
+        }
+    ]
+}
+**** END PROPERTIES SKAFFOLDER ****
 // DEPENDENCIES
 import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
@@ -22,22 +54,9 @@ import { ModalChangePasswordComponent } from './components/modal-change-password
 import { LoginComponent } from './pages/login/login.component';
 
 /* START MY VIEWS IMPORTS*/
-// Do not edit this comment content, it will be overwritten in next Skaffolder generation
-import { HomeComponent } from './pages/home/home.component';
-import { CompanyComponent } from './pages/company/company.component';
-import { CompanyEditComponent } from './pages/company-edit/company-edit.component';
-import { ContactDetailComponent } from './pages/contact-detail/contact-detail.component';
-import { ContactEditComponent } from './pages/contact-edit/contact-edit.component';
-
 /* END MY VIEWS IMPORTS*/
 
 /* START MY SERVICES IMPORTS*/
-// Do not edit this comment content, it will be overwritten in next Skaffolder generation
-import { CompanyService } from './services/company.service';
-import { ContactService } from './services/contact.service';
-import { Table1Service } from './services/table1.service';
-import { UserService } from './services/user.service';
-
 /* END MY SERVICES IMPORTS*/
 
 // LAYOUT
@@ -80,13 +99,7 @@ import { MailValidator } from './directives/mail-validate.directive';
     ModalChangePasswordComponent,
     
     /* START DECLARATIONS */
-// Do not edit this comment content, it will be overwritten in next Skaffolder generation
-    HomeComponent,
-    CompanyComponent,
-    CompanyEditComponent,
-    ContactDetailComponent,
-    ContactEditComponent,
- /* END DECLARATIONS */
+    /* END DECLARATIONS */
     
     // PIPE
     SearchPipe
@@ -97,12 +110,7 @@ import { MailValidator } from './directives/mail-validate.directive';
   ],
   providers:    [
     /* START PROVIDERS */
-// Do not edit this comment content, it will be overwritten in next Skaffolder generation
-    CompanyService,
-    ContactService,
-    Table1Service,
-    UserService,
- /* END PROVIDERS */
+    /* END PROVIDERS */
     
     // SECURITY
     AuthGuard,
